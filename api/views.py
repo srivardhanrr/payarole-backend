@@ -1,3 +1,4 @@
+import requests
 from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -97,3 +98,10 @@ class UserProfileView(APIView):
     def get(self, request):
         serializer = UserProfileSerializer(request.user)
         return Response(serializer.data)
+
+
+class RandomUser(APIView):
+
+    def get(self, request):
+        response = requests.get("https://randomuser.me/api/")
+        return Response(response.json())
